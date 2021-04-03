@@ -1,11 +1,21 @@
 import express from 'express';
+import { renameSync } from 'node:fs';
 import connection from '../config/database';
 const router = express.Router();
 
-
 /* 조회 API GET method */
-router.get('/', (req: express.Request, res: express.Response) => {
-    res.send('respond with a resource');
+router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
+    // console.log(req);
+    const checker: string = req.params.u_id;
+
+    const queryForShow: any = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', checker,
+    function (err, result) {
+        if (err) {
+            console.error(err);
+            res.status(400).send({ error: '400', message: 'bad request' });
+        }
+        res.status(200).send(connection.query);
+    })
 });
 
 // 회원가입 API POST method
@@ -20,7 +30,7 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
         'mod_dt': req.body.mod_dt,
         'last_login_dt': req.body.last_login_dt
     };
-    const query: string = connection.query('INSERT INTO tbl_user set ?', signupData, 
+    const queryForSignup: any = connection.query('INSERT INTO tbl_user set ?', signupData, 
     function (err, result) {
         if (err) {
             console.error(err);
