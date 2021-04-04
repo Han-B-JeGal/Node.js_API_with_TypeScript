@@ -7,19 +7,19 @@ const router = express.Router();
 router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
     const u_id: number = parseInt(req.params.u_id, 10);
     if (!u_id) {    // u_id가 number 타입이 아닐 경우 대비한 if문 *parseInt() 리턴값이 NaN이면 u_id에 NaN이 들어가기때문
-        return res.status(400).json({ error: '400', message: 'Incorrect u_id'});
+        res.status(400).json({ error: '400', message: 'incorrect u_id'});
     }
-    const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', u_id,
-    function (err, result) {
-        if (result[0]===undefined) {    // result가 undefined면 값이 없는 것이므로 400에러 뱉는다
-            console.error(err);
-            res.status(400).send({ error: '400', message: 'empty result' });
-        }
-        else {
-            res.status(200).json(result);
-        }
-        
-    });
+    else {
+        const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', u_id,
+        function (err, result) {
+            if (result[0]===undefined) {    // result가 undefined면 값이 없는 것이므로 400에러 뱉는다
+                res.status(400).send({ error: '400', message: 'empty result' });
+            }
+            else {
+                res.status(200).json(result);
+            }
+       });
+    }
 });
 
 // 회원가입 API POST method
@@ -41,7 +41,7 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
             res.status(200).json({ message: 'success !!' });
         } 
         else {
-            res.status(400).json({ error: err['errno'], message: 'bad request' });
+            res.status(400).json({ error: err['errno'], message: err['sqlMessage'] });
             throw err;
         }
     });
