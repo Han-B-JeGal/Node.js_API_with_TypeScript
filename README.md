@@ -1,5 +1,5 @@
 - ### TODO
-  - write delete API by DELETE method
+  - write API Specification document
 
 
 - ### WHAT I'M DOING NOW
