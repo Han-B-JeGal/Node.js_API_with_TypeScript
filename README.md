@@ -2,8 +2,16 @@
   
   - write CRUD API
 
+
+- ### WHAT I'M DOING NOW
+  - writing UPDATE API   
+
+
+
 - ### CAUTION !!
   - 조회 API에서 실패시에도 200 뱉음. 수정요망
+
+
 
 
 - ### I'VE DONE
