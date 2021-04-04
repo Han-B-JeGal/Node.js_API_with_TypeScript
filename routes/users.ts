@@ -3,10 +3,10 @@ import { renameSync } from 'node:fs';
 import connection from '../config/database';
 const router = express.Router();
 
-/* 조회 API GET method */
+// 조회 API GET method
 router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
     const u_id: number = parseInt(req.params.u_id, 10);
-    if (!u_id) {
+    if (!u_id) {    // u_id가 number 타입이 아닐 경우 대비한 if문 *parseInt() 리턴값이 NaN이면 u_id에 NaN이 들어가기때문
         return res.status(400).json({ error: '400', message: 'Incorrect u_id'});
     }
     const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', u_id,
@@ -15,7 +15,10 @@ router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
             console.error(err);
             res.status(400).send({ error: '400', message: 'empty result' });
         }
-        res.status(200).json(result);
+        else {
+            res.status(200).json(result);
+        }
+        
     });
 });
 
@@ -33,15 +36,14 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
     };
     const queryForSignup: string = connection.query('INSERT INTO tbl_user set ?', signupData, 
     function (err, result) {
-        if (err) {
-            console.error(err);
-            if (err['errno'] == 1062) {
-                console.log("UNIQUE KEY Duplicate ERROR");
-                res.status(422).send({ error: '422', message: 'this error is UNIQUE KEY Duplicate ERROR'});
-            }
+        console.log(err);
+        if (err===null) {
+            res.status(200).json({ message: 'success !!' });
+        } 
+        else {
+            res.status(400).json({ error: err['errno'], message: 'bad request' });
             throw err;
         }
-        res.status(200).send('success');
     });
 });
 
