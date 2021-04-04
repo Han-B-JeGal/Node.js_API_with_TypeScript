@@ -7,27 +7,16 @@ const router = express.Router();
 router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
     const u_id: number = parseInt(req.params.u_id, 10);
     if (!u_id) {
-        return res.status(400).json({error: 'Incorrect id'});
+        return res.status(400).json({ error: '400', message: 'Incorrect u_id'});
     }
     const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', u_id,
     function (err, result) {
-        if (err) {
+        if (result[0]===undefined) {    // result가 undefined면 값이 없는 것이므로 400에러 뱉는다
             console.error(err);
-            res.status(400).send({ error: '400', message: 'bad request' });
+            res.status(400).send({ error: '400', message: 'empty result' });
         }
         res.status(200).json(result);
-    })
-
-
-    /* const checker: string = req.params.u_id;
-    const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', checker,
-    function (err, result) {
-        if (err) {
-            console.error(err);
-            res.status(400).send({ error: '400', message: 'bad request' });
-        }
-        res.status(200).send(connection.query);
-    }) */
+    });
 });
 
 // 회원가입 API POST method

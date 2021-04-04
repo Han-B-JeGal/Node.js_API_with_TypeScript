@@ -1,5 +1,5 @@
 - ### TODO
-  - 조회 API의 if문 result가 비어있으면 400에러 처리하기
+  
   - write CRUD API
 
 - ### CAUTION !!
@@ -7,6 +7,7 @@
 
 
 - ### I'VE DONE
+  - 조회 API의 if문 구조를 result가 비어있으면 400에러 뱉게 처리하기
   - write mysql config on routes/user.ts
   - refactoring mysql configuration on routes/user.ts
   - modify get parameter and whole entire get method
