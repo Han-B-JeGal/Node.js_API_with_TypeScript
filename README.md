@@ -18,3 +18,7 @@
   - write mysql config on routes/user.ts
   - refactoring mysql configuration on routes/user.ts
   - modify get parameter and whole entire get method
+
+
+  ### API DOCUMENTATION
+  https://testapi-1.gitbook.io/testapi/
