@@ -13,7 +13,7 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
         'u_nm': req.body.u_nm,
         'u_pwd': req.body.u_pwd,    // TODO : Encryption
         'u_mobile_no': req.body.u_mobile_no,  // TODO : Encryption
-        'reg_dt': req.body.reg_dt,
+        'reg_dt': req['_startTime'],
         'mod_dt': req.body.mod_dt,
         'last_login_dt': req.body.last_login_dt
     };
@@ -33,11 +33,11 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
 
 
 // 조회 API GET method
-router.get('/show/:u_id', (req: express.Request, res: express.Response) => {
+router.get('/:u_id/show', (req: express.Request, res: express.Response) => {
     const u_id: number = parseInt(req.params.u_id, 10);
 
     if (!u_id) {    // u_id의 자료형이 number가 아닐 경우 대비한 if문 !  parseInt()의 리턴값이 NaN이면 u_id에 NaN이 들어가기때문
-        res.status(400).json({ error: '400', message: 'incorrect u_id'});
+        res.status(400).json({ error: '400', message: 'this is not number'});
     }
     else {
         const queryForShow: string = connection.query('SELECT reg_dt FROM tbl_user WHERE u_id = ?', u_id,
@@ -62,7 +62,8 @@ router.put('/:u_id/modify', (req: express.Request, res: express.Response) => {
     const modifyData: any = {
         'u_nm': req.body.u_nm,
         'u_pwd': req.body.u_pwd,
-        'u_mobile_no': req.body.u_mobile_no
+        'u_mobile_no': req.body.u_mobile_no,
+        'mod_dt': req['_startTime']
     };
 
     const queryForModify: string = connection.query('UPDATE tbl_user SET ? WHERE u_id = ?', [modifyData, u_id],
@@ -71,8 +72,8 @@ router.put('/:u_id/modify', (req: express.Request, res: express.Response) => {
             res.status(200).json({ message: 'modify success !!'});
         }
         else {
-            console.log(err);
-            res.status(400).send({ error: err, message: 'something went wrong' });
+            console.log(result);
+            res.status(400).send({ message: 'something went wrong' });
         }
     });
 });
@@ -92,7 +93,7 @@ router.delete('/:u_id/delete', (req: express.Request, res: express.Response) => 
         else {
             console.log(err);
             console.log(req);
-            res.status(400).send({ error: err, message: 'something went wrong' });
+            res.status(400).send({ message: 'something went wrong' });
         }
     });
 });
