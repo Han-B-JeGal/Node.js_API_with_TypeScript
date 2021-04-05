@@ -21,4 +21,10 @@
 
 
   ### API DOCUMENTATION
-  https://testapi-1.gitbook.io/testapi/
+
+
+- ### WRITTEN BY
+  - 제갈한범 aka JKHB
+  - (+82) 010-8822-8547
+  - jkhb717@gmail.com
+  - last touch was April 5th, 2021
