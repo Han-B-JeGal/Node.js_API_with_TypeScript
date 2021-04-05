@@ -20,8 +20,8 @@
   - modify get parameter and whole entire get method
 
 
-  ### API DOCUMENTATION
-
+- ### API DOCUMENTATION
+https://app.gitbook.com/@testapi-1/s/testapi/
 
 - ### WRITTEN BY
   - 제갈한범 aka JKHB
