@@ -1,5 +1,5 @@
 - ### TODO 🤪
-
+  - start making AUTH function by JWT
 
 
 - ### WHAT I'M DOING NOW 😇
