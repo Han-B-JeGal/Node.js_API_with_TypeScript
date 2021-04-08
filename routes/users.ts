@@ -21,6 +21,7 @@ router.post('/signup', (req: express.Request, res: express.Response) => {
     const queryForSignup: string = connection.query('INSERT INTO tbl_user SET ?', signupData, 
     function (err, result) {
         if (err===null) {
+            console.log(req);
             res.status(200).json({ message: 'sign up success !!' });
         } 
         else {
