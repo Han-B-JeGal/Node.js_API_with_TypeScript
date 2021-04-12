@@ -101,6 +101,15 @@ router.delete('/:u_id/delete', (req: express.Request, res: express.Response) => 
 
 
 
+// 로그인 API POST method
+router.post('/login', (req: express.Request, res: express.Response) => {
+    const logInData: any = {
+        'u_email': req.body.u_email,
+        'u_pwd': req.body.u_pwd
+    };
+
+
+})
 
 
 export = router;
