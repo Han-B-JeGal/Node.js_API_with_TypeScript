@@ -110,6 +110,7 @@ router.post('/login', (req: express.Request, res: express.Response) => {
         'u_pwd': req.body.u_pwd
     };
     // TODO : 이메일, 비밀번호 조회 후 req.body와 DB상의 데이터 일치하는지 파악 후 에러뱉을지 200뱉을지
+    // ISSUE REPORT : if 조건 에러. result empty라고 나옴.
     const queryForLogIn: string = connection.query('SELECT u_email from tbl_user WHERE u_email = ?', emailDataForLogIn,
     function (err, result) {
         console.log(err);
