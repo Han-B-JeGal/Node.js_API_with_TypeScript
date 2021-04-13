@@ -103,6 +103,10 @@ router.delete('/:u_id/delete', (req: express.Request, res: express.Response) => 
 
 // 로그인 API POST method
 router.post('/login', (req: express.Request, res: express.Response) => {
+    const dataForLogIn: any = {
+        'u_email': req.body.u_email,
+        'u_pwd': req.body.u_pwd
+    };
     const queryForLogIn: string = connection.query('SELECT u_email, u_pwd from tbl_user WHERE u_email = ? AND u_pwd = ?', [req.body.u_email, req.body.u_pwd],
     function (err, result) {
         if (result[0]===undefined) { // result[0]이 undefined면 값이 없는것이므로 400에러 뱉음
