@@ -103,27 +103,15 @@ router.delete('/:u_id/delete', (req: express.Request, res: express.Response) => 
 
 // 로그인 API POST method
 router.post('/login', (req: express.Request, res: express.Response) => {
-    const dataForLogIn: any = {
-        'u_email': req.body.u_email,
-        'u_pwd': req.body.u_pwd
-    };
-    // TODO : 이메일, 비밀번호 조회 후 req.body와 DB상의 데이터 일치하는지 파악 후 에러뱉을지 200뱉을지
-    // ISSUE REPORT : if 조건 에러. result empty라고 나옴.
     const queryForLogIn: string = connection.query('SELECT u_email, u_pwd from tbl_user WHERE u_email = ? AND u_pwd = ?', [req.body.u_email, req.body.u_pwd],
     function (err, result) {
-        console.log(err);
-        console.log(result);
-        if (err===null) {
+        if (result[0]===undefined) { // result[0]이 undefined면 값이 없는것이므로 400에러 뱉음
             console.log(err);
-            console.log(result);
-            console.log("err==null");
-            res.status(200).send({ message: 'login success'});
+            res.status(400).json({ error: '400', message: 'bad request'});
         }
         else {
-            console.log(err);
             console.log(result);
-            console.log("it's else");
-            res.status(400).json({ error: '400', message: 'wrong info'});
+            res.status(200).send({ message: 'login success'});
         }
     });
 });
