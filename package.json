@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node ./bin/www"
+    "start": "ts-node ./bin/www.ts"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

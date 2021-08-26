@@ -1,5 +1,4 @@
 import express from 'express';
-import { renameSync } from 'node:fs';
 import connection from '../config/database';
 const router = express.Router();
 

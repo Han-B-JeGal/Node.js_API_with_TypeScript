@@ -29,3 +29,9 @@ https://app.gitbook.com/@testapi-1/s/testapi/
   - (+82) 010-8822-8547
   - jkhb717@gmail.com
   - last touch was April 5th, 2021
+
+
+- ### HOW TO RUN 
+  - 1. TURN YOUR DBMS ON
+  - 2. RUN TERMINAL AND EXCUTE 'ts-node ./bin/www.ts'
+  - 3. ENJOY IT !!
