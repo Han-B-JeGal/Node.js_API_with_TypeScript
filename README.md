@@ -39,3 +39,4 @@ https://app.gitbook.com/@testapi-1/s/testapi/
 
 - ### HOW TO PUSH INTO GITHUB
   - USE THE TOKEN !!
+  - APPLY THE TOKEN IN SOURCETREE !!
