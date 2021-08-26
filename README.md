@@ -35,3 +35,7 @@ https://app.gitbook.com/@testapi-1/s/testapi/
   - 1. TURN YOUR DBMS ON
   - 2. RUN TERMINAL AND EXCUTE 'ts-node ./bin/www.ts'
   - 3. ENJOY IT !!
+
+
+- ### HOW TO PUSH INTO GITHUB
+  - USE THE TOKEN !!
