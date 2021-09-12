@@ -134,6 +134,30 @@ a {
   
 }
 
+a.CheckID {
+	color: rgb(1, 221, 250);
+	box-shadow: rgb(208, 255, 0) 0 0px 0px 2px inset;
+  width: 70px;
+  text-align: center;
+}
+
+a.CheckID:hover {
+  color: rgba(247, 243, 21, 0.986);
+	box-shadow: rgba(0, 255, 76, 0.7) 0 0px 0px 40px inset;
+}
+
+a.SignUp {
+  color: rgb(252, 18, 182);
+  box-shadow: rgb(4, 255, 242) 0 0px 0px 2px inset;
+  width: 150px;
+}
+
+a.SignUp:hover {
+  color: rgba(255, 0, 234, 0.986);
+	box-shadow: rgb(0, 247, 255) 0 0px 0px 40px inset;
+
+}
+
 a.button {
 	color: rgb(252, 18, 182);
 	box-shadow: rgb(255, 6, 222) 0 0px 0px 2px inset;
@@ -153,5 +177,6 @@ a.button2:hover {
 	color: rgba(247, 243, 21, 0.986);
 	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
 }
+
 
 

@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Organized.</title>
+    <title>Sign Up</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 
   <body>
-    <div class="title">
-      <h1>Organized.</h1>
-    </div>
-
     <div class="signInForm">
       <div class="id">
         <p>
           <input type="text" id="id" style="background-color: #000000; border-right: #ff0000 1px solid; border-left: #ff8c09 1px solid; border-top: #03ff6c 1px solid; border-bottom: #ff1bec 1px solid;"/>
           <label for="id">id</label>
         </p>
-      </div>
+    </div>
+    <a class="CheckID" onclick="checkID()" >Check ID</a>
 
       <br>
 
@@ -29,14 +26,20 @@
 
       <br>
 
+      <div class="pwCheck">
+        <p>
+          <input type="password" id="pwCheck" style="background-color: #000000; border-right: #ff01b3 1px solid; border-left: #23c1ff 1px solid; border-top: #27ff14  1px solid; border-bottom: #ffc400 1px solid;"/>
+          <label for="pwCheck">pw Check</label>
+        </p>
+      </div>
+
       <!-- <div class="IndexButton">
         <button type="button" onclick="login()">Log In</button>
         <button type="button" onclick="location.href='signUp.ejs'">Sign Up</button>
       </div> -->
       
       <div class="wrap">
-        <a class="button" onclick="logIn()" >Log In</a>
-        <a href="./signUp" class="button2" >Sign Up</a>
+        <a class="SignUp" onclick="signUp()" >Register</a>
     </div>
 
   </body>
