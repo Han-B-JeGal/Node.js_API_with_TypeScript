@@ -11,23 +11,33 @@
     </div>
 
     <div class="signInForm">
-      <label>
-        ID
-      </label>
+      <div class="id">
+        <p>
+          <input type="text" id="id" style="background-color: #000000;"/>
+          <label for="id">id</label>
+        </p>
+      </div>
+
       <br>
-      <input type="text" name="ID" required autocomplete="off" />
+
+      <div class="pw">
+        <p>
+          <input type="password" id="pw" style="background-color: #000000;"/>
+          <label for="pw">pw</label>
+        </p>
+      </div>
+
       <br>
-      <br>
-      <br>
-      <label>
-        PW
-      </label>
-      <br>
-      <input type="password" name="PW" />
-      <br>
-      <br>
-      <button type="submit">Sign In</button>  
+
+      <!-- <div class="IndexButton">
+        <button type="button" onclick="login()">Log In</button>
+        <button type="button" onclick="location.href='signUp.ejs'">Sign Up</button>
+      </div> -->
+      
+      <div class="wrap">
+        <a class="button" onclick="logIn()" >Log In</a>
+        <a href="signup.ejs" class="button2" >Sign Up</a>
     </div>
-    
+
   </body>
 </html>

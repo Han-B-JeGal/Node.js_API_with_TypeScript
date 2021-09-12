@@ -1,11 +1,10 @@
 h1 { 
-  color:blueviolet;
+  color:rgb(250, 246, 0);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: bold;
 
 
 }
-
 
 body {
   /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
@@ -32,6 +31,127 @@ body {
 }
 
 
+
 a {
   color: #00B7FF;
 }
+
+
+.signInForm input[type="text"], 
+.signInForm input[type="password"] { 
+  font-weight: bolder;
+  width: 100%; /* 원하는 너비 설정 */ 
+  height: auto; /* 높이값 초기화 */ 
+  line-height : normal; /* line-height 초기화 */ 
+  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  border: 1px solid rgb(81, 255, 0); 
+  border-radius: 30px / 30px;
+
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */ 
+
+}
+
+
+
+
+.signInForm p {
+	position: relative;
+}
+.signInForm input,
+.signInForm label {
+	-webkit-transition: all .2s;
+	transition: all .2s;
+	font-size: 15px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+}
+.signInForm input {
+	width: 300px;
+	padding: .5em .5em .5em 3.5em;
+	border: 1px solid #aaa;
+	background: #fff;
+	border-radius: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #333;
+}
+.signInForm label {
+	position: absolute;
+	top: .7em;
+	left: .5em;
+	color: #aaa;
+	line-height: 1;
+}
+.signInForm input:focus {
+	padding-left: .5em;
+}
+.signInForm input:focus + label {
+	top: -2.5em;
+	left: 0;
+	padding: .4em .7em .45em;
+	border-radius: .2em;
+	background-color: blueviolet;
+	color: #fff;
+	font-size: 14px;
+}
+.signInForm input:focus + label::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -6px;
+	border: 6px solid transparent;
+	border-top-color: blueviolet;
+}
+
+
+
+.wrap {
+	position: absolute;
+	top: 140%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+a {
+	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: 20px auto;
+	max-width: 180px;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 20px 30px;
+  
+}
+
+a.button {
+	color: rgb(252, 18, 182);
+	box-shadow: rgb(255, 6, 222) 0 0px 0px 2px inset;
+}
+
+a.button:hover {
+	color: rgba(247, 243, 21, 0.986);
+	box-shadow: rgba(48, 10, 163, 0.7) 0 0px 0px 40px inset;
+}
+
+a.button2 {
+	color: rgb(0, 255, 191);
+  box-shadow: rgb(62, 28, 255) 0 0px 0px 2px inset;
+}
+
+a.button2:hover {
+	color: rgba(247, 243, 21, 0.986);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
+
+
