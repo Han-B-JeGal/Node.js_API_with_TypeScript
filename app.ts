@@ -3,7 +3,6 @@ import createError from 'http-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import bodyParser from 'body-parser';
 import ejs from 'ejs';
 
 import indexRouter from './routes/index';
@@ -18,12 +17,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine("ejs", ejs.renderFile);
 
-app.use(bodyParser.json())
-.use(bodyParser.urlencoded({ extended: false}));
-
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
