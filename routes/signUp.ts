@@ -1,6 +1,7 @@
 import express from 'express';
 import { resolve } from 'path';
 import connection from '../config/database';
+import { encrypt, decrypt } from './crypto';
 
 const router = express.Router();
 
@@ -9,11 +10,12 @@ const router = express.Router();
 router.post('/Register', (req: express.Request, res: express.Response) => {
     const signUpData: any = {
         'id': req.body.id,
-        'pw': req.body.pw,
-        'pwCheck': req.body.pwCheck
+        'pw': req.body.pw, // TODO: ENCRYPT
+        'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     }
-    console.log(req);
 
+    console.log(signUpData);
+    
     res.status(200).send({ message: 'AM I WHAT YOU EXPECTED?'});
     
 })
