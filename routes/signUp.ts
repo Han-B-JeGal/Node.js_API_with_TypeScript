@@ -14,6 +14,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     }
 
+    // TODO: ID DUPLICATE CHECKING LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
     console.log(signUpData);
     
     res.status(200).send({ message: 'AM I WHAT YOU EXPECTED?'});
