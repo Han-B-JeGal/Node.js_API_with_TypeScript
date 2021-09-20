@@ -3,6 +3,8 @@ import createError from 'http-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import bodyParser from 'body-parser';
+import ejs from 'ejs';
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
@@ -10,9 +12,14 @@ import signUpRouter from './routes/signUp';
 
 const app: express.Application = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.engine("ejs", ejs.renderFile);
+
+app.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(logger('dev'));
 app.use(express.json());

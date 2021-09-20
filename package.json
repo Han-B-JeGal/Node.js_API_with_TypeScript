@@ -6,6 +6,7 @@
     "start": "ts-node ./bin/www.ts"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
