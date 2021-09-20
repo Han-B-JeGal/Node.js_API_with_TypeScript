@@ -69,8 +69,8 @@ a {
 .signInForm input {
 	width: 300px;
 	padding: .5em .5em .5em 3.5em;
-	border: 1px solid #aaa;
-	background: #fff;
+	border: 1px solid rgb(255, 255, 255);
+	background: transparent;
 	border-radius: 0;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -83,7 +83,7 @@ a {
 	position: absolute;
 	top: .7em;
 	left: .5em;
-	color: #aaa;
+	color: rgb(236, 235, 235);
 	line-height: 1;
 }
 .signInForm input:focus {
@@ -95,7 +95,7 @@ a {
 	padding: .4em .7em .45em;
 	border-radius: .2em;
 	background-color: blueviolet;
-	color: #fff;
+	color: rgb(240, 239, 239);
 	font-size: 14px;
 }
 .signInForm input:focus + label::after {
@@ -110,16 +110,27 @@ a {
 
 
 
-.wrap {
+.wrap, .signUp {
 	position: absolute;
-	top: 140%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+	top: 120%;
+ 	left: 50%;
+  	margin-right: -50%;
+  	transform: translate(-50%, -50%);
 	text-align: center;
+	
 }
 
-a {
+.wrap2 {
+	position: absolute;
+	top: 30%;
+ 	left: 50%;
+  	margin-right: -50%;
+  	transform: translate(-50%, -50%);
+	text-align: center;
+	
+}
+
+.button, .signUp {
 	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
 	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
 	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
@@ -131,52 +142,16 @@ a {
 	text-decoration: none;
 	border-radius: 4px;
 	padding: 20px 30px;
+	background: rgb(160, 2, 192);
+	box-shadow: rgb(208, 255, 0) 0 0px 0px 2px inset;
+  	width: 120px;
+  	text-align: center;
+}
+
+.button:hover, .signUp:hover {
+	color: rgba(247, 243, 21, 0.986);
+	box-shadow: rgba(0, 255, 76, 0.7) 0 0px 0px 40px inset;
   
 }
-
-a.CheckID {
-	color: rgb(1, 221, 250);
-	box-shadow: rgb(208, 255, 0) 0 0px 0px 2px inset;
-  width: 70px;
-  text-align: center;
-}
-
-a.CheckID:hover {
-  color: rgba(247, 243, 21, 0.986);
-	box-shadow: rgba(0, 255, 76, 0.7) 0 0px 0px 40px inset;
-}
-
-a.SignUp {
-  color: rgb(252, 18, 182);
-  box-shadow: rgb(4, 255, 242) 0 0px 0px 2px inset;
-  width: 150px;
-}
-
-a.SignUp:hover {
-  color: rgba(255, 0, 234, 0.986);
-	box-shadow: rgb(0, 247, 255) 0 0px 0px 40px inset;
-
-}
-
-a.button {
-	color: rgb(252, 18, 182);
-	box-shadow: rgb(255, 6, 222) 0 0px 0px 2px inset;
-}
-
-a.button:hover {
-	color: rgba(247, 243, 21, 0.986);
-	box-shadow: rgba(48, 10, 163, 0.7) 0 0px 0px 40px inset;
-}
-
-a.button2 {
-	color: rgb(0, 255, 191);
-  box-shadow: rgb(62, 28, 255) 0 0px 0px 2px inset;
-}
-
-a.button2:hover {
-	color: rgba(247, 243, 21, 0.986);
-	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
-}
-
 
 
