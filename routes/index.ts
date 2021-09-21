@@ -7,10 +7,6 @@ router.get('/', (req: express.Request, res: express.Response) => {
     res.render('index', { title: 'Express' });
 });
 
-router.get('/signUp', (req: express.Request, res: express.Response) => {
-    res.render('signUp', { title: 'Express' });
-});
-
 router.post('/signUp', (req: express.Request, res: express.Response) => {
     res.render('signUp', { title: 'Express' });
 });

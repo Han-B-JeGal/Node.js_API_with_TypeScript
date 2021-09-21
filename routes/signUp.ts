@@ -1,4 +1,7 @@
+import { sign } from 'crypto';
+import { resolveInclude } from 'ejs';
 import express from 'express';
+import { STATUS_CODES } from 'http';
 import { resolve } from 'path';
 import connection from '../config/database';
 import { encrypt, decrypt } from './crypto';
@@ -6,25 +9,114 @@ import { encrypt, decrypt } from './crypto';
 const router = express.Router();
 
 
+
+//====================================================================================================================
+
+
+
 // SignUp API. POST method.
 router.post('/Register', (req: express.Request, res: express.Response) => {
     const signUpData: any = {
         'id': req.body.id,
+        'email': req.body.email,
         'pw': req.body.pw, // TODO: ENCRYPT
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
-    }
-
-    // TODO: ID DUPLICATE CHECKING LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
-    console.log(signUpData);
+    };
     
-    res.status(200).send({ message: 'AM I WHAT YOU EXPECTED?'});
-    
-})
+    // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
-router.post('/checkID', (req: express.Request, res: express.Response) => {
+    let isCheckingID_DONE:boolean = false;
+    let isCheckingEMAIL_DONE:boolean = false;
+
+    const checkingID: string = connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['id'], 
+    function (err, result) {
+        console.log(result);
+        if (result.length > 0){
+            return res.status(400).json({ message: 'ID already exits'});
+        }
+        else
+        {
+            isCheckingID_DONE = true;
+        };
+    
+
+        const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
+        function (err, result) {
+            console.log(result);
+            if (result.length > 0){
+                return res.status(400).json({ message: 'EMAIL already exits'});
+            }
+            else
+            {
+                isCheckingEMAIL_DONE = true;
+            };
+        });
+
+        // console.log(signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0);
+
+        const checkingPW: Function = function() {
+            // if localeCompare() returns '0' THEN BOTH ARE EXACT  
+            if (signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0) {
+                console.log("OKAY TO GO"); // TODO: write signUp Query 
+            }
+            else {
+                res.status(400).json({ message: 'PassWord isn\'t Identical'});
+            };
+            
+        };
+
+        console.log(isCheckingID_DONE);
+        console.log(isCheckingEMAIL_DONE);
+        
+        // if checking ID&EMAIL is OKAY THEN SignUp
+        if (isCheckingID_DONE && isCheckingEMAIL_DONE) {
+            checkingPW();
+        }
+        
+        
+
+    });
+
+    // const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
+    // function (err, result) {
+    //     console.log("this is result");
+    //     console.log(result);
+    //     if (err===null){
+    //     }
+    //     else {
+    //         res.status(400).json({ message: 'EMAIL already exits'});
+    //     };
+
+    // });
+
+
+
+
+});
+
+
+    // if (signUpData['pw'] === signUpData['pwCheck']) {
+    //     res.status(200).json({ message: 'DONE'});
+    // }
+    // else {
+    //     res.status(400).json({ message: 'Password isn\'t identical'});
+    // };
+
+
+
+
+    // if (!signUpData['pw']==signUpData['pwCheck']) {
+    //     res.status(400).json({ message: 'Password isn\'t identical'});
+    // }
+
+    // CHECKING DUPLICATE ID & EMAIL => IF OK THEN SIGNUP
+
 
     
-    res.status(200).send({ message: ' AM I WHAT YOU EXPECTED?'});
-})
+
+
+//====================================================================================================================
+
+
 
 export = router;

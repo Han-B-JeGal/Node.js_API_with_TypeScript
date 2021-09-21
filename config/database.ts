@@ -4,7 +4,7 @@ import { router } from '../app';
 
 const connection: any = mysql.createConnection({
     host: '127.0.0.1',
-    port: '3306',
+    port: '1433',
     user: 'root',
     password: 'root',
     database: 'test',
