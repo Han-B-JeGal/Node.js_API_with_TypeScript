@@ -25,19 +25,13 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     
     // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
-    let isCheckingID_DONE:boolean = false;
-    let isCheckingEMAIL_DONE:boolean = false;
-
     const checkingID: string = connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['id'], 
     function (err, result) {
         console.log(result);
         if (result.length > 0){
             return res.status(400).json({ message: 'ID already exits'});
         }
-        else
-        {
-            isCheckingID_DONE = true;
-        };
+
     
 
         const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
@@ -46,10 +40,6 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
             if (result.length > 0){
                 return res.status(400).json({ message: 'EMAIL already exits'});
             }
-            else
-            {
-                isCheckingEMAIL_DONE = true;
-            };
         });
 
         // console.log(signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0);
@@ -65,17 +55,15 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
             
         };
 
-        console.log(isCheckingID_DONE);
-        console.log(isCheckingEMAIL_DONE);
+        checkingPW();
         
-        // if checking ID&EMAIL is OKAY THEN SignUp
-        if (isCheckingID_DONE && isCheckingEMAIL_DONE) {
-            checkingPW();
-        }
         
         
 
     });
+
+});
+
 
     // const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
     // function (err, result) {
@@ -90,9 +78,6 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     // });
 
 
-
-
-});
 
 
     // if (signUpData['pw'] === signUpData['pwCheck']) {
