@@ -3,10 +3,14 @@ import { resolveInclude } from 'ejs';
 import express from 'express';
 import { STATUS_CODES } from 'http';
 import { resolve } from 'path';
+import { allowedNodeEnvironmentFlags } from 'process';
+import { CLIENT_RENEG_WINDOW } from 'tls';
 import connection from '../config/database';
 import { encrypt, decrypt } from './crypto';
 
 const router = express.Router();
+
+
 
 
 
@@ -22,79 +26,95 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         'pw': req.body.pw, // TODO: ENCRYPT
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     };
+
+    const initialAlert: Function = function() {
+        console.log("resolve call");
+    }
+    
+    const ExistingIdAlert: Function = function() {
+        res.status(400).json( { message : 'ID Already Exists !!'});
+    }
+    
+    const ExistingEmailAlert: Function = function() {
+        res.status(400).json( { message : 'Email Already Exists !!'});
+    }    
+    
+    const IdenticalPasswordAlert: Function = function() {
+        res.status(400).json( { message : 'PassWord isn\'t Identical !!'});
+    }
     
     // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
-    const checkingID: string = connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['id'], 
-    function (err, result) {
-        console.log(result);
-        if (result.length > 0){
-            return res.status(400).json({ message: 'ID already exits'});
-        }
 
-    
 
-        const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
-        function (err, result) {
-            console.log(result);
-            if (result.length > 0){
-                return res.status(400).json({ message: 'EMAIL already exits'});
-            }
-        });
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
+        checkingID();
+    })
+    .catch(ExistingIdAlert())
 
-        // console.log(signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0);
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
+        checkingEmail();
+    })
+    .catch(ExistingEmailAlert())
 
-        const checkingPW: Function = function() {
-            // if localeCompare() returns '0' THEN BOTH ARE EXACT  
-            if (signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0) {
-                console.log("OKAY TO GO"); // TODO: write signUp Query 
-            }
-            else {
-                res.status(400).json({ message: 'PassWord isn\'t Identical'});
-            };
-            
-        };
-
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
         checkingPW();
-        
-        
-        
+    })
+    .catch(IdenticalPasswordAlert());
 
-    });
+
+
+
+    function checkingID() {
+        connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['id'],
+        function (err, result) {
+            // console.log(result[0].U_ID);  // USE result[0] to access RowDataPacket's Data
+
+            if (result[0] !== undefined) {
+                return new Error('ID Already Exists !!');
+            };
+        });
+    };
+
+
+    function checkingEmail() {
+        connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'],
+        function (err, result) {
+            console.log(result[0]); // USE result[0] to access RowDataPacket's Data
+            if (result[0] != undefined) {
+                return new Error('EMail Already Exists !!');
+            };
+        });
+    };
+
+
+    function checkingPW() {
+        if (signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0) {
+            console.log("OKAY TO GO"); // TODO: write signUp Query 
+        }
+        else {
+            throw new Error('PassWord isn\'t Identical !!');
+        };
+    };
+
+
+
+
 
 });
 
-
-    // const checkingEmail: string = connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'], 
-    // function (err, result) {
-    //     console.log("this is result");
-    //     console.log(result);
-    //     if (err===null){
-    //     }
-    //     else {
-    //         res.status(400).json({ message: 'EMAIL already exits'});
-    //     };
-
-    // });
-
-
-
-
-    // if (signUpData['pw'] === signUpData['pwCheck']) {
-    //     res.status(200).json({ message: 'DONE'});
-    // }
-    // else {
-    //     res.status(400).json({ message: 'Password isn\'t identical'});
-    // };
-
-
-
-
-    // if (!signUpData['pw']==signUpData['pwCheck']) {
-    //     res.status(400).json({ message: 'Password isn\'t identical'});
-    // }
-
-    // CHECKING DUPLICATE ID & EMAIL => IF OK THEN SIGNUP
 
 
     
