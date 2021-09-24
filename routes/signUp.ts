@@ -21,9 +21,9 @@ const router = express.Router();
 // SignUp API. POST method.
 router.post('/Register', (req: express.Request, res: express.Response) => {
     const signUpData: any = {
-        'id': req.body.id,
-        'email': req.body.email,
-        'pw': req.body.pw, // TODO: ENCRYPT
+        'U_ID': req.body.id,
+        'U_EMAIL': req.body.email,
+        'U_PW': req.body.pw, // TODO: ENCRYPT
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     };
 
@@ -78,7 +78,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
 
 
     function checkingID() {
-        connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['id'],
+        connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['U_ID'],
         function (err, result) {
             // console.log(result[0].U_ID);  // USE result[0] to access RowDataPacket's Data
 
@@ -90,7 +90,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
 
 
     function checkingEmail() {
-        connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['email'],
+        connection.query('SELECT U_EMAIL FROM REGISTERED_USER_INFO WHERE U_EMAIL = ?', signUpData['U_EMAIL'],
         function (err, result) {
             console.log(result[0]); // USE result[0] to access RowDataPacket's Data
             if (result[0] != undefined) {
@@ -101,7 +101,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
 
 
     function checkingPW() {
-        if (signUpData['pw'].localeCompare(signUpData['pwCheck']) == 0) {
+        if (signUpData['U_PW'].localeCompare(signUpData['pwCheck']) == 0) {
             console.log("OKAY TO GO"); // TODO: write signUp Query 
         }
         else {
