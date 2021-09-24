@@ -78,12 +78,12 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
 
 
     function checkingID() {
-        connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['U_ID'],
+        const ResultOfCheckingID:string = connection.query('SELECT U_ID FROM REGISTERED_USER_INFO WHERE U_ID = ?', signUpData['U_ID'],
         function (err, result) {
             // console.log(result[0].U_ID);  // USE result[0] to access RowDataPacket's Data
 
-            if (result[0] !== undefined) {
-                return new Error('ID Already Exists !!');
+            if (result[0] != undefined) {
+                throw new Error('ID Already Exists !!');
             };
         });
     };
@@ -94,7 +94,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         function (err, result) {
             console.log(result[0]); // USE result[0] to access RowDataPacket's Data
             if (result[0] != undefined) {
-                return new Error('EMail Already Exists !!');
+                throw new Error('EMail Already Exists !!');
             };
         });
     };
