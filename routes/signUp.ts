@@ -27,13 +27,18 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     };
 
+    // Checking is Password Empty
+    if (signUpData['U_PW'] == []) {
+        res.status(400).json( { message : 'Fill Up the Empty Space !!'});
+    }
+
     const initialAlert: Function = function() {
         console.log("resolve call");
     }
     
-    const ExistingIdAlert: Function = function() {
+    /* const ExistingIdAlert: Function = function() {
         res.status(400).json( { message : 'ID Already Exists !!'});
-    }
+    } 
     
     const ExistingEmailAlert: Function = function() {
         res.status(400).json( { message : 'Email Already Exists !!'});
@@ -41,7 +46,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     
     const IdenticalPasswordAlert: Function = function() {
         res.status(400).json( { message : 'PassWord isn\'t Identical !!'});
-    }
+    } */
     
     // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
@@ -54,7 +59,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     .then(() => {
         checkingID();
     })
-    .catch(ExistingIdAlert())
+    .catch()
 
     new Promise((resolve, reject) => {
         console.log("SignUp Initiated");
@@ -63,7 +68,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     .then(() => {
         checkingEmail();
     })
-    .catch(ExistingEmailAlert())
+    .catch()
 
     new Promise((resolve, reject) => {
         console.log("SignUp Initiated");
@@ -72,7 +77,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     .then(() => {
         checkingPW();
     })
-    .catch(IdenticalPasswordAlert());
+    .catch();
 
 
 
@@ -83,6 +88,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
             // console.log(result[0].U_ID);  // USE result[0] to access RowDataPacket's Data
 
             if (result[0] != undefined) {
+                res.status(400).json( { message : 'ID Already Exists !!'});
                 throw new Error('ID Already Exists !!');
             };
         });
@@ -94,6 +100,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         function (err, result) {
             console.log(result[0]); // USE result[0] to access RowDataPacket's Data
             if (result[0] != undefined) {
+                res.status(400).json( { message : 'Email Already Exists !!'});
                 throw new Error('EMail Already Exists !!');
             };
         });
@@ -105,6 +112,7 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
             console.log("OKAY TO GO"); // TODO: write signUp Query 
         }
         else {
+            res.status(400).json( { message : 'PassWord isn\'t Identical !!'});
             throw new Error('PassWord isn\'t Identical !!');
         };
     };
