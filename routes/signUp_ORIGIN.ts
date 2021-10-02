@@ -12,14 +12,7 @@ const router = express.Router();
 
 
 
-//====================================================================================================================
 
-/* 
-DEV's NOTE 
-FINAL EDITED 10/3, 2021
-
-How about declare a random variable and use it for Promise variable? like a checker 
- */
 
 //====================================================================================================================
 
@@ -34,49 +27,57 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
         'pwCheck': req.body.pwCheck // TODO: ENCRYPT
     };
 
+    // is Password Empty?
+    if (signUpData['U_PW'] == []) {
+        res.status(400).json( { message : 'Fill Up the Empty Space !!'});
+    }
+
     const initialAlert: Function = function() {
         console.log("resolve call");
     }
-
-    // is Password Empty? Or Start Promise Chain
-    if (signUpData['U_PW'] == []) {
-        res.status(400).json( { message : 'Fill Up the Empty Space !!'});
+    
+    /* const ExistingIdAlert: Function = function() {
+        res.status(400).json( { message : 'ID Already Exists !!'});
     } 
-    else 
-    {
-        new Promise((resolve, reject) => {
-            console.log("SignUp Initiated");
-            resolve(initialAlert());
-        })
-        .then(() => {
-            checkingID();
-        })
-        .catch()
     
-        new Promise((resolve, reject) => {
-            console.log("SignUp Initiated");
-            resolve(initialAlert());
-        })
-        .then(() => {
-            checkingEmail();
-        })
-        .catch()
+    const ExistingEmailAlert: Function = function() {
+        res.status(400).json( { message : 'Email Already Exists !!'});
+    }    
     
-        new Promise((resolve, reject) => {
-            console.log("SignUp Initiated");
-            resolve(initialAlert());
-        })
-        .then(() => {
-            checkingPW();
-        })
-        .catch();
-    }
-
-
-
+    const IdenticalPasswordAlert: Function = function() {
+        res.status(400).json( { message : 'PassWord isn\'t Identical !!'});
+    } */
     
+    // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
 
+
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
+        checkingID();
+    })
+    .catch()
+
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
+        checkingEmail();
+    })
+    .catch()
+
+    new Promise((resolve, reject) => {
+        console.log("SignUp Initiated");
+        resolve(initialAlert());
+    })
+    .then(() => {
+        checkingPW();
+    })
+    .catch();
 
 
 
@@ -115,21 +116,6 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
             throw new Error('PassWord isn\'t Identical !!');
         };
     };
-
-
-    /* const ExistingIdAlert: Function = function() {
-        res.status(400).json( { message : 'ID Already Exists !!'});
-    } 
-    
-    const ExistingEmailAlert: Function = function() {
-        res.status(400).json( { message : 'Email Already Exists !!'});
-    }    
-    
-    const IdenticalPasswordAlert: Function = function() {
-        res.status(400).json( { message : 'PassWord isn\'t Identical !!'});
-    } */
-    
-    // TODO: CHECKING DUPLICATED ID LOGIC & SIGNUP QUERY & PW IDENTICAL CHECKING LOGIC
 
 
 
