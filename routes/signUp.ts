@@ -44,6 +44,9 @@ router.post('/Register', (req: express.Request, res: express.Response) => {
     } 
     else 
     {
+        // promise 내부에 메소드 넣어야함 현재는 then()내부에 실행되게 돼있음
+
+
         new Promise((resolve, reject) => {
             console.log("SignUp Initiated");
             resolve(initialAlert());
